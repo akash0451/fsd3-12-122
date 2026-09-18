@@ -17,4 +17,4 @@ const server = http.createServer((req, res) => {
   res.end(JSON.stringify(product));
 });
 
-server.listen(3000, () => console.log("Server is runninng at 3000...."));
+server.listen(3000, () => console.log("Server is runninng at 3000..."));
