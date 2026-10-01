@@ -21,7 +21,7 @@ app.get("/products",(req,res)=>{
  const product={
     id:1,
     name: "Mobile",
-    price: 25000,
+    price: 50000,
  };
  res.send(product);
 });
