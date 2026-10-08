@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechTutor | Master Computer Science</title>
+    
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#2563eb', // blue-600
+                        secondary: '#1e40af', // blue-800
+                        dark: '#0f172a', // slate-900
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom Styles for smooth transitions -->
+    <style>
+        .fade-in {
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans flex flex-col min-h-screen">
+
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <!-- Logo -->
+                <div class="flex items-center cursor-pointer" onclick="navigateTo('home')">
+                    <i class="fa-solid fa-code text-primary text-3xl mr-2"></i>
+                    <span class="font-extrabold text-2xl text-dark tracking-tight">Tech<span class="text-primary">Tutor</span></span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <button class="nav-link text-primary font-medium hover:text-primary transition-colors duration-200" data-target="home" onclick="navigateTo('home')">Home</button>
+                    <button class="nav-link text-gray-600 font-medium hover:text-primary transition-colors duration-200" data-target="courses" onclick="navigateTo('courses')">Courses</button>
+                    <button class="nav-link text-gray-600 font-medium hover:text-primary transition-colors duration-200" data-target="about" onclick="navigateTo('about')">About Us</button>
+                    <button class="nav-link text-gray-600 font-medium hover:text-primary transition-colors duration-200" data-target="testimonials" onclick="navigateTo('testimonials')">Testimonials</button>
+                    <button class="nav-link text-gray-600 font-medium hover:text-primary transition-colors duration-200" data-target="contact" onclick="navigateTo('contact')">Contact</button>
+                    <button class="bg-primary hover:bg-secondary text-white px-5 py-2.5 rounded-lg font-medium transition-colors shadow-sm" onclick="navigateTo('courses')">Get Started</button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-primary focus:outline-none p-2">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <button class="nav-link block w-full text-left px-3 py-3 rounded-md text-base font-medium text-primary hover:bg-gray-50" data-target="home" onclick="navigateTo('home')">Home</button>
+                <button class="nav-link block w-full text-left px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50" data-target="courses" onclick="navigateTo('courses')">Courses</button>
+                <button class="nav-link block w-full text-left px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50" data-target="about" onclick="navigateTo('about')">About Us</button>
+                <button class="nav-link block w-full text-left px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50" data-target="testimonials" onclick="navigateTo('testimonials')">Testimonials</button>
+                <button class="nav-link block w-full text-left px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50" data-target="contact" onclick="navigateTo('contact')">Contact</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow">
+        
+        <!-- HOME PAGE -->
+        <section id="home" class="page-section fade-in">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <span class="text-primary font-semibold tracking-wider uppercase text-sm mb-4 block">Accelerate Your Career</span>
+                        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-dark leading-tight mb-6">
+                            Master <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-cyan-500">Computer Science</span> Fundamentals
+                        </h1>
+                        <p class="text-lg text-gray-600 mb-8 max-w-lg leading-relaxed">
+                            Join elite online coaching classes to build real-world skills in C++, Data Structures, Web Development, and Blockchain technology. Learn from industry experts and land your dream tech job.
+                        </p>
+                        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                            <button class="bg-primary hover:bg-secondary text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1" onclick="navigateTo('courses')">
+                                Explore Courses <i class="fa-solid fa-arrow-right ml-2"></i>
+                            </button>
+                            <button class="bg-white hover:bg-gray-50 text-dark border border-gray-200 px-8 py-4 rounded-xl font-semibold text-lg transition-all shadow-sm" onclick="navigateTo('about')">
+                                Learn More
+                            </button>
+                        </div>
+                        <div class="mt-10 flex items-center space-x-6">
+                            <div class="flex -space-x-4">
+                                <img class="w-10 h-10 rounded-full border-2 border-white" src="https://placehold.co/100x100/e2e8f0/475569?text=U1" alt="User 1">
+                                <img class="w-10 h-10 rounded-full border-2 border-white" src="https://placehold.co/100x100/cbd5e1/334155?text=U2" alt="User 2">
+                                <img class="w-10 h-10 rounded-full border-2 border-white" src="https://placehold.co/100x100/94a3b8/1e293b?text=U3" alt="User 3">
+                            </div>
+                            <p class="text-sm text-gray-500 font-medium">Joined by <span class="text-dark font-bold">5,000+</span> students globally</p>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-blue-100 to-cyan-50 rounded-3xl transform rotate-3 scale-105 -z-10"></div>
+                        <img src="https://placehold.co/800x600/ffffff/2563eb?text=Tech+Education+Illustration" alt="Coding Education" class="rounded-3xl shadow-2xl border border-gray-100 object-cover w-full">
+                        
+                        <!-- Floating badge -->
+                        <div class="absolute -bottom-6 -left-6 bg-white p-4 rounded-xl shadow-xl border border-gray-100 flex items-center space-x-4 animate-bounce" style="animation-duration: 3s;">
+                            <div class="bg-green-100 p-3 rounded-full">
+                                <i class="fa-solid fa-certificate text-green-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 font-medium">Success Rate</p>
+                                <p class="text-xl font-bold text-dark">98%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Features Section -->
+            <div class="bg-white py-16 border-t border-gray-100">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
+                        <div>
+                            <div class="bg-blue-50 w-16 h-16 mx-auto rounded-2xl flex items-center justify-center mb-6">
+                                <i class="fa-solid fa-laptop-code text-2xl text-primary"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-dark mb-3">Live Interactive Classes</h3>
+                            <p class="text-gray-600">Engage directly with instructors in real-time, ask questions, and solve problems collaboratively.</p>
+                        </div>
+                        <div>
+                            <div class="bg-blue-50 w-16 h-16 mx-auto rounded-2xl flex items-center justify-center mb-6">
+                                <i class="fa-solid fa-code-branch text-2xl text-primary"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-dark mb-3">Project-Based Learning</h3>
+                            <p class="text-gray-600">Build a robust portfolio by working on real-world industry projects and assignments.</p>
+                        </div>
+                        <div>
+                            <div class="bg-blue-50 w-16 h-16 mx-auto rounded-2xl flex items-center justify-center mb-6">
+                                <i class="fa-solid fa-briefcase text-2xl text-primary"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-dark mb-3">Career Support</h3>
+                            <p class="text-gray-600">Get resume reviews, mock interviews, and direct referrals to top tech companies.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- COURSES PAGE -->
+        <section id="courses" class="page-section hidden fade-in py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-primary font-semibold tracking-wider uppercase text-sm mb-2">Our Programs</h2>
+                    <h1 class="text-4xl md:text-5xl font-extrabold text-dark mb-6">Popular Courses</h1>
+                    <p class="text-lg text-gray-600">Curated curriculum designed to take you from beginner to industry-ready professional. Choose your path below.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Course 1 -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow duration-300 group flex flex-col h-full">
+                        <div class="h-48 bg-gradient-to-r from-blue-600 to-blue-400 flex items-center justify-center relative overflow-hidden">
+                            <i class="fa-brands fa-cuttlefish text-6xl text-white opacity-90 group-hover:scale-110 transition-transform duration-300"></i>
+                            <i class="fa-solid fa-plus text-3xl text-white absolute top-14 ml-12 opacity-90 group-hover:scale-110 transition-transform duration-300"></i>
+                            <i class="fa-solid fa-plus text-3xl text-white absolute top-14 ml-24 opacity-90 group-hover:scale-110 transition-transform duration-300"></i>
+                        </div>
+                        <div class="p-8 flex flex-col flex-grow">
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="bg-blue-100 text-primary text-xs font-bold px-3 py-1 rounded-full">Intermediate</span>
+                                <span class="text-gray-500 text-sm font-medium"><i class="fa-regular fa-clock mr-1"></i> 8 Weeks</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-dark mb-3">C++ & OOP Fundamentals</h3>
+                            <p class="text-gray-600 mb-6 flex-grow">Master memory management, pointers, and Object-Oriented Programming principles using Modern C++.</p>
+                            <button class="w-full bg-gray-50 text-dark border border-gray-200 hover:border-primary hover:bg-primary hover:text-white py-3 rounded-xl font-semibold transition-all" onclick="alert('Course enrollment module opening soon!')">Enroll Now</button>
+                        </div>
+                    </div>
+
+                    <!-- Course 2 -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow duration-300 group flex flex-col h-full">
+                        <div class="h-48 bg-gradient-to-r from-emerald-600 to-teal-400 flex items-center justify-center overflow-hidden">
+                            <i class="fa-solid fa-network-wired text-6xl text-white opacity-90 group-hover:scale-110 transition-transform duration-300"></i>
+                        </div>
+                        <div class="p-8 flex flex-col flex-grow">
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="bg-emerald-100 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full">Advanced</span>
+                                <span class="text-gray-500 text-sm font-medium"><i class="fa-regular fa-clock mr-1"></i> 12 Weeks</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-dark mb-3">Data Structures & Algorithms</h3>
+                            <p class="text-gray-600 mb-6 flex-grow">Crack top tech interviews by mastering arrays, trees, graphs, dynamic programming, and algorithmic design.</p>
+                            <button class="w-full bg-gray-50 text-dark border border-gray-200 hover:border-primary hover:bg-primary hover:text-white py-3 rounded-xl font-semibold transition-all" onclick="alert('Course enrollment module opening soon!')">Enroll Now</button>
+                        </div>
+                    </div>
+
+                    <!-- Course 3 -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow duration-300 group flex flex-col h-full">
+                        <div class="h-48 bg-gradient-to-r from-purple-600 to-indigo-400 flex items-center justify-center overflow-hidden">
+                            <i class="fa-brands fa-react text-6xl text-white opacity-90 group-hover:scale-110 transition-transform duration-300"></i>
+                        </div>
+                        <div class="p-8 flex flex-col flex-grow">
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="bg-purple-100 text-purple-700 text-xs font-bold px-3 py-1 rounded-full">Beginner</span>
+                                <span class="text-gray-500 text-sm font-medium"><i class="fa-regular fa-clock mr-1"></i> 10 Weeks</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-dark mb-3">Full-Stack Web Dev</h3>
+                            <p class="text-gray-600 mb-6 flex-grow">Build responsive, dynamic web applications from scratch using HTML, CSS, React, Node.js, and MongoDB.</p>
+                            <button class="w-full bg-gray-50 text-dark border border-gray-200 hover:border-primary hover:bg-primary hover:text-white py-3 rounded-xl font-semibold transition-all" onclick="alert('Course enrollment module opening soon!')">Enroll Now</button>
+                        </div>
+                    </div>
+
+                    <!-- Course 4 -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow duration-300 group flex flex-col h-full">
+                        <div class="h-48 bg-gradient-to-r from-orange-500 to-yellow-400 flex items-center justify-center overflow-hidden">
+                            <i class="fa-brands fa-ethereum text-6xl text-white opacity-90 group-hover:scale-110 transition-transform duration-300"></i>
+                        </div>
+                        <div class="p-8 flex flex-col flex-grow">
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="bg-orange-100 text-orange-700 text-xs font-bold px-3 py-1 rounded-full">All Levels</span>
+                                <span class="text-gray-500 text-sm font-medium"><i class="fa-regular fa-clock mr-1"></i> 6 Weeks</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-dark mb-3">Blockchain & Web3</h3>
+                            <p class="text-gray-600 mb-6 flex-grow">Dive into decentralized technology. Learn Solidity, smart contract deployment, and build dApps on Ethereum.</p>
+                            <button class="w-full bg-gray-50 text-dark border border-gray-200 hover:border-primary hover:bg-primary hover:text-white py-3 rounded-xl font-semibold transition-all" onclick="alert('Course enrollment module opening soon!')">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT PAGE -->
+        <section id="about" class="page-section hidden fade-in py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
+                    <div class="order-2 lg:order-1 relative">
+                        <div class="absolute inset-0 bg-primary opacity-10 rounded-3xl transform -rotate-3 scale-105 -z-10"></div>
+                        <img src="https://placehold.co/600x600/ffffff/1e293b?text=Team+of+Instructors" alt="About Us" class="rounded-3xl shadow-xl w-full border border-gray-100">
+                    </div>
+                    <div class="order-1 lg:order-2">
+                        <h2 class="text-primary font-semibold tracking-wider uppercase text-sm mb-2">About TechTutor</h2>
+                        <h1 class="text-4xl font-extrabold text-dark mb-6">Empowering the Next Generation of Engineers</h1>
+                        <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                            Founded by a group of ex-FAANG engineers, TechTutor was built on a simple premise: high-quality computer science education should be accessible, practical, and aligned with industry standards.
+                        </p>
+                        <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                            We bridge the gap between academic theory and real-world application. Our curriculum focuses heavily on writing code, debugging systems, and building scalable architecture.
+                        </p>
+                        
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="border-l-4 border-primary pl-4">
+                                <p class="text-3xl font-extrabold text-dark mb-1">5k+</p>
+                                <p class="text-gray-600 font-medium">Students Enrolled</p>
+                            </div>
+                            <div class="border-l-4 border-primary pl-4">
+                                <p class="text-3xl font-extrabold text-dark mb-1">200+</p>
+                                <p class="text-gray-600 font-medium">Hiring Partners</p>
+                            </div>
+                            <div class="border-l-4 border-primary pl-4">
+                                <p class="text-3xl font-extrabold text-dark mb-1">50+</p>
+                                <p class="text-gray-600 font-medium">Expert Mentors</p>
+                            </div>
+                            <div class="border-l-4 border-primary pl-4">
+                                <p class="text-3xl font-extrabold text-dark mb-1">98%</p>
+                                <p class="text-gray-600 font-medium">Placement Rate</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Instructor Highlight -->
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-dark mb-4">Meet Our Lead Instructors</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">Learn directly from professionals who have built systems at scale for top technology companies.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Instructor 1 -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 text-center">
+                        <img src="https://placehold.co/150x150/cbd5e1/1e293b?text=SJ" alt="Sarah Jenkins" class="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-gray-50">
+                        <h3 class="text-xl font-bold text-dark">Sarah Jenkins</h3>
+                        <p class="text-primary font-medium text-sm mb-3">Ex-Google • DSA Expert</p>
+                        <p class="text-gray-600 text-sm">10+ years of experience in distributed systems. Passionate about teaching algorithmic problem-solving.</p>
+                    </div>
+                    <!-- Instructor 2 -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 text-center">
+                        <img src="https://placehold.co/150x150/cbd5e1/1e293b?text=MR" alt="Marcus Reed" class="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-gray-50">
+                        <h3 class="text-xl font-bold text-dark">Marcus Reed</h3>
+                        <p class="text-primary font-medium text-sm mb-3">Senior Web Dev • React Maestro</p>
+                        <p class="text-gray-600 text-sm">Full-stack wizard who has built enterprise applications serving millions of users globally.</p>
+                    </div>
+                    <!-- Instructor 3 -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 text-center">
+                        <img src="https://placehold.co/150x150/cbd5e1/1e293b?text=AL" alt="Anita Lee" class="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-gray-50">
+                        <h3 class="text-xl font-bold text-dark">Anita Lee</h3>
+                        <p class="text-primary font-medium text-sm mb-3">Blockchain Architect • Web3</p>
+                        <p class="text-gray-600 text-sm">Pioneer in decentralized finance applications. Leads our advanced Solidity and smart contract modules.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TESTIMONIALS PAGE -->
+        <section id="testimonials" class="page-section hidden fade-in py-20 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-primary font-semibold tracking-wider uppercase text-sm mb-2">Success Stories</h2>
+                    <h1 class="text-4xl md:text-5xl font-extrabold text-dark mb-6">What Our Students Say</h1>
+                    <p class="text-lg text-gray-600">Don't just take our word for it. Read how TechTutor has transformed careers and helped students land roles at top tech companies.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Review 1 -->
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 relative">
+                        <i class="fa-solid fa-quote-left text-4xl text-gray-200 absolute top-6 right-6"></i>
+                        <div class="flex text-yellow-400 mb-4 text-sm">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-gray-600 mb-8 italic relative z-10">
+                            "The DSA course is an absolute game-changer. I was struggling with dynamic programming and graphs, but Sarah's teaching style made everything click. I recently cleared my interviews at Amazon!"
+                        </p>
+                        <div class="flex items-center">
+                            <img src="https://placehold.co/100x100/e2e8f0/475569?text=JD" alt="John Doe" class="w-12 h-12 rounded-full mr-4">
+                            <div>
+                                <h4 class="font-bold text-dark">James Peterson</h4>
+                                <p class="text-xs text-gray-500">SDE I at Amazon</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 2 -->
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 relative">
+                        <i class="fa-solid fa-quote-left text-4xl text-gray-200 absolute top-6 right-6"></i>
+                        <div class="flex text-yellow-400 mb-4 text-sm">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-gray-600 mb-8 italic relative z-10">
+                            "I transitioned from marketing to tech thanks to the Full-Stack Web Dev bootcamp. Building 4 massive portfolio projects gave me the confidence to apply for front-end roles."
+                        </p>
+                        <div class="flex items-center">
+                            <img src="https://placehold.co/100x100/e2e8f0/475569?text=EM" alt="Emily Chen" class="w-12 h-12 rounded-full mr-4">
+                            <div>
+                                <h4 class="font-bold text-dark">Emily Chen</h4>
+                                <p class="text-xs text-gray-500">Frontend Dev at Startup</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 3 -->
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 relative">
+                        <i class="fa-solid fa-quote-left text-4xl text-gray-200 absolute top-6 right-6"></i>
+                        <div class="flex text-yellow-400 mb-4 text-sm">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <p class="text-gray-600 mb-8 italic relative z-10">
+                            "The Web3 and Blockchain course is intense but highly rewarding. Anita dives deep into smart contract security which is crucial. Worth every penny for anyone serious about Web3."
+                        </p>
+                        <div class="flex items-center">
+                            <img src="https://placehold.co/100x100/e2e8f0/475569?text=RK" alt="Rahul Kumar" class="w-12 h-12 rounded-full mr-4">
+                            <div>
+                                <h4 class="font-bold text-dark">Rahul Kumar</h4>
+                                <p class="text-xs text-gray-500">Web3 Engineer</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT PAGE -->
+        <section id="contact" class="page-section hidden fade-in py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100">
+                    <div class="grid grid-cols-1 lg:grid-cols-5">
+                        
+                        <!-- Contact Info Box -->
+                        <div class="bg-primary text-white p-10 lg:col-span-2 flex flex-col justify-between">
+                            <div>
+                                <h2 class="text-3xl font-bold mb-6">Get in Touch</h2>
+                                <p class="text-blue-100 mb-10 leading-relaxed">
+                                    Have questions about our courses, curriculum, or enrollment? Fill out the form, and our admissions team will get back to you within 24 hours.
+                                </p>
+                                
+                                <div class="space-y-6">
+                                    <div class="flex items-start">
+                                        <i class="fa-solid fa-location-dot mt-1 text-xl w-8 text-blue-200"></i>
+                                        <p>123 Innovation Drive,<br>Tech Park, Silicon Valley, CA 94043</p>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fa-solid fa-phone text-xl w-8 text-blue-200"></i>
+                                        <p>+1 (800) 123-4567</p>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fa-solid fa-envelope text-xl w-8 text-blue-200"></i>
+                                        <p>admissions@techtutor.com</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-12 flex space-x-4">
+                                <a href="#" class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center hover:bg-white hover:text-primary transition-colors">
+                                    <i class="fa-brands fa-twitter"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center hover:bg-white hover:text-primary transition-colors">
+                                    <i class="fa-brands fa-linkedin-in"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center hover:bg-white hover:text-primary transition-colors">
+                                    <i class="fa-brands fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Contact Form -->
+                        <div class="p-10 lg:col-span-3">
+                            <h3 class="text-2xl font-bold text-dark mb-6">Send us a Message</h3>
+                            <form onsubmit="handleFormSubmit(event)">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                    <div>
+                                        <label for="firstName" class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+                                        <input type="text" id="firstName" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="John">
+                                    </div>
+                                    <div>
+                                        <label for="lastName" class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+                                        <input type="text" id="lastName" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="Doe">
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-6">
+                                    <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                                    <input type="email" id="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="john@example.com">
+                                </div>
+
+                                <div class="mb-6">
+                                    <label for="interest" class="block text-sm font-medium text-gray-700 mb-2">Course of Interest</label>
+                                    <select id="interest" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all bg-white">
+                                        <option value="">Select a Course</option>
+                                        <option value="cpp">C++ & OOP Fundamentals</option>
+                                        <option value="dsa">Data Structures & Algorithms</option>
+                                        <option value="webdev">Full-Stack Web Dev</option>
+                                        <option value="web3">Blockchain & Web3</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="mb-8">
+                                    <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                                    <textarea id="message" rows="4" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all resize-none" placeholder="How can we help you?"></textarea>
+                                </div>
+                                
+                                <button type="submit" class="w-full bg-primary hover:bg-secondary text-white font-bold py-4 px-6 rounded-lg transition-colors shadow-md">
+                                    Send Message
+                                </button>
+                                
+                                <!-- Success Message (hidden by default) -->
+                                <div id="form-success" class="hidden mt-4 p-4 bg-green-100 text-green-700 rounded-lg text-center font-medium">
+                                    Thank you! Your message has been sent successfully.
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-gray-300 py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <!-- Branding -->
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fa-solid fa-code text-primary text-2xl mr-2"></i>
+                        <span class="font-extrabold text-xl text-white tracking-tight">Tech<span class="text-primary">Tutor</span></span>
+                    </div>
+                    <p class="text-sm text-gray-400 mb-6">
+                        Premium online coaching for aspiring software engineers. Master the fundamentals and land your dream job.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-white font-bold mb-4 uppercase text-sm tracking-wider">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><button onclick="navigateTo('home')" class="hover:text-primary transition-colors">Home</button></li>
+                        <li><button onclick="navigateTo('courses')" class="hover:text-primary transition-colors">Courses</button></li>
+                        <li><button onclick="navigateTo('about')" class="hover:text-primary transition-colors">About Us</button></li>
+                        <li><button onclick="navigateTo('testimonials')" class="hover:text-primary transition-colors">Testimonials</button></li>
+                        <li><button onclick="navigateTo('contact')" class="hover:text-primary transition-colors">Contact</button></li>
+                    </ul>
+                </div>
+
+                <!-- Courses -->
+                <div>
+                    <h4 class="text-white font-bold mb-4 uppercase text-sm tracking-wider">Our Courses</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" onclick="navigateTo('courses')" class="hover:text-primary transition-colors">C++ & OOP</a></li>
+                        <li><a href="#" onclick="navigateTo('courses')" class="hover:text-primary transition-colors">Data Structures</a></li>
+                        <li><a href="#" onclick="navigateTo('courses')" class="hover:text-primary transition-colors">Full-Stack Web</a></li>
+                        <li><a href="#" onclick="navigateTo('courses')" class="hover:text-primary transition-colors">Blockchain</a></li>
+                        <li><a href="#" onclick="navigateTo('courses')" class="hover:text-primary transition-colors">System Design</a></li>
+                    </ul>
+                </div>
+
+                <!-- Legal / Newsletter -->
+                <div>
+                    <h4 class="text-white font-bold mb-4 uppercase text-sm tracking-wider">Newsletter</h4>
+                    <p class="text-sm text-gray-400 mb-4">Subscribe to get weekly tech tips and course updates.</p>
+                    <div class="flex">
+                        <input type="email" placeholder="Your Email" class="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-l-md text-white focus:outline-none focus:border-primary text-sm">
+                        <button class="bg-primary hover:bg-secondary px-3 py-2 rounded-r-md transition-colors text-white">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+                <p>&copy; 2026 TechTutor Online Coaching. All rights reserved.</p>
+                <div class="space-x-4 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts for Navigation and Interactivity -->
+    <script>
+        // Single Page Navigation Logic
+        function navigateTo(pageId) {
+            // Hide all sections
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            
+            // Show target section
+            const targetSection = document.getElementById(pageId);
+            if(targetSection) {
+                targetSection.classList.remove('hidden');
+            }
+
+            // Update Navbar Active State
+            document.querySelectorAll('.nav-link').forEach(link => {
+                // Reset styling
+                link.classList.remove('text-primary');
+                if(link.closest('#mobile-menu')) {
+                    link.classList.remove('text-primary', 'bg-gray-50');
+                    link.classList.add('text-gray-700');
+                } else {
+                    link.classList.add('text-gray-600');
+                }
+                
+                // Set active styling if dataset matches
+                if(link.dataset.target === pageId) {
+                    if(link.closest('#mobile-menu')) {
+                        link.classList.remove('text-gray-700');
+                        link.classList.add('text-primary', 'bg-gray-50');
+                    } else {
+                        link.classList.remove('text-gray-600');
+                        link.classList.add('text-primary');
+                    }
+                }
+            });
+
+            // Close mobile menu if open
+            document.getElementById('mobile-menu').classList.add('hidden');
+
+            // Scroll to top
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Mobile Menu Toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Initialize Home page as active visually
+        navigateTo('home');
+
+        // Handle Contact Form Submit Fake Logic
+        function handleFormSubmit(event) {
+            event.preventDefault(); // Prevent page reload
+            
+            // Show success message
+            const successMsg = document.getElementById('form-success');
+            successMsg.classList.remove('hidden');
+            
+            // Reset form fields
+            event.target.reset();
+            
+            // Hide message after 5 seconds
+            setTimeout(() => {
+                successMsg.classList.add('hidden');
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
