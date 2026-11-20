@@ -12,6 +12,19 @@ app.get("/api/products",(req,res)=>{
         id,
      }));
      res.status(200).json({count:sortedProducts.length,data:sortedProducts})
+});
+
+// get all details of particular products
+app.get("/api/products/:pid",(req,res)=>{
+     const {pid}=req.params;
+     const item =products.find((p)=>p.id=== Number(pid))
+     if(!item)
+     {
+        res.status(200).json({msg:`Product with id ${pid} not found`});
+     }
+     else{
+        res.status(200).json({msg: "Product found", data: item});
+     }
 })
 
 
